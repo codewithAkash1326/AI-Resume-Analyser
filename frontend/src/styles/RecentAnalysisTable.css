@@ -1,0 +1,11 @@
+.recent-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.recent-table th,
+.recent-table td {
+  padding: 15px;
+  border: 1px solid #ddd;
+}

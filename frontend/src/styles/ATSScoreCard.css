@@ -1,0 +1,15 @@
+.score-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.score-card h3 {
+  color: gray;
+  margin-bottom: 15px;
+}
+
+.score-card h1 {
+  color: #2563eb;
+}

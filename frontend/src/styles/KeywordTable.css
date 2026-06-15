@@ -1,0 +1,11 @@
+.keyword-table {
+  width: 100%;
+  background: white;
+  border-collapse: collapse;
+}
+
+.keyword-table th,
+.keyword-table td {
+  padding: 15px;
+  border: 1px solid #ddd;
+}

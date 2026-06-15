@@ -1,0 +1,14 @@
+.analysis-page {
+  flex: 1;
+  padding: 30px;
+}
+
+.recommendations {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+}
+
+.recommendations li {
+  margin-bottom: 12px;
+}

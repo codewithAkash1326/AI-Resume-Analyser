@@ -1,0 +1,17 @@
+.navbar {
+  height: 70px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logout-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
