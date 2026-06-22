@@ -5,7 +5,6 @@ import api from "../api/axios";
 
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
-import ResumeCard from "../components/ResumeCard";
 
 import "../styles/UploadResume.css";
 
@@ -14,8 +13,8 @@ function UploadResume() {
 
   const [file, setFile] = useState(null);
   const [jobDescription, setJobDescription] = useState("");
-
   const [resumes, setResumes] = useState([]);
+  const [selectedResume, setSelectedResume] = useState(null);
 
   useEffect(() => {
     fetchResumes();
@@ -24,7 +23,6 @@ function UploadResume() {
   const fetchResumes = async () => {
     try {
       const response = await api.get("/resume");
-
       setResumes(response.data.resumes);
     } catch (error) {
       console.log(error);
@@ -32,27 +30,42 @@ function UploadResume() {
   };
 
   const handleUpload = async () => {
-    if (!file) return;
-
-    const formData = new FormData();
-
-    formData.append("resume", file);
+    if (!file) {
+      alert("Please select a PDF file");
+      return;
+    }
 
     try {
+      const formData = new FormData();
+
+      formData.append("resume", file);
+
       await api.post("/resume/upload", formData);
 
-      fetchResumes();
+      alert("Resume uploaded successfully");
 
-      alert("Resume uploaded");
+      setFile(null);
+
+      fetchResumes();
     } catch (error) {
       console.log(error);
     }
   };
 
-  const analyzeResume = async (resumeId) => {
+  const analyzeResume = async () => {
+    if (!selectedResume) {
+      alert("Please select a resume");
+      return;
+    }
+
+    if (!jobDescription.trim()) {
+      alert("Please paste a job description");
+      return;
+    }
+
     try {
       const response = await api.post("/analysis/analyze", {
-        resumeId,
+        resumeId: selectedResume,
         jobDescription,
       });
 
@@ -70,28 +83,61 @@ function UploadResume() {
         <Sidebar />
 
         <div className="upload-page">
-          <h1>Upload Resume</h1>
+          {/* Upload Section */}
+          <div className="section-card">
+            <h1>📄 Upload Resume</h1>
 
-          <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+            <input
+              type="file"
+              accept=".pdf"
+              onChange={(e) => setFile(e.target.files[0])}
+            />
 
-          <button onClick={handleUpload}>Upload</button>
+            <button className="upload-btn" onClick={handleUpload}>
+              Upload Resume
+            </button>
+          </div>
 
-          <textarea
-            rows="10"
-            placeholder="Paste Job Description"
-            value={jobDescription}
-            onChange={(e) => setJobDescription(e.target.value)}
-          />
+          {/* Select Resume */}
+          <div className="section-card">
+            <h2>📚 Select Resume</h2>
 
-          <h2>Your Resumes</h2>
+            {resumes.length === 0 ? (
+              <p>No resumes uploaded yet.</p>
+            ) : (
+              <div className="resume-list">
+                {resumes.map((resume) => (
+                  <button
+                    key={resume._id}
+                    className={
+                      selectedResume === resume._id
+                        ? "resume-btn selected"
+                        : "resume-btn"
+                    }
+                    onClick={() => setSelectedResume(resume._id)}
+                  >
+                    {resume.fileName}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
 
-          {resumes.map((resume) => (
-            <div className="resume-wrapper" key={resume._id}>
-              <ResumeCard resume={resume} />
+          {/* Job Description */}
+          <div className="section-card">
+            <h2>📝 Job Description</h2>
 
-              <button onClick={() => analyzeResume(resume._id)}>Analyze</button>
-            </div>
-          ))}
+            <textarea
+              rows="10"
+              placeholder="Paste Job Description here..."
+              value={jobDescription}
+              onChange={(e) => setJobDescription(e.target.value)}
+            />
+
+            <button className="analyze-btn" onClick={analyzeResume}>
+              Analyze Resume
+            </button>
+          </div>
         </div>
       </div>
     </>

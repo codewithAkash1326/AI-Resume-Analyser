@@ -1,10 +1,12 @@
 .layout {
   display: flex;
+  min-height: calc(100vh - 70px);
 }
 
 .upload-page {
   flex: 1;
   padding: 30px;
+  background: #f5f7fb;
 }
 
 .upload-page input,
@@ -14,11 +16,60 @@
   margin-bottom: 20px;
 }
 
-.upload-page button {
-  padding: 12px 25px;
+input[type="file"] {
+  display: block;
   margin-bottom: 20px;
 }
 
-.resume-wrapper {
-  margin-bottom: 20px;
+.upload-btn,
+.analyze-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  font-size: 15px;
+}
+
+.upload-btn {
+  background: #2563eb;
+}
+
+.analyze-btn {
+  margin-top: 20px;
+  background: #16a34a;
+}
+
+.resume-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.resume-btn {
+  padding: 12px 20px;
+  border: 1px solid #d1d5db;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.resume-btn:hover {
+  background: #f3f4f6;
+}
+
+.resume-btn.selected {
+  background: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+textarea {
+  width: 100%;
+  padding: 15px;
+  resize: vertical;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
 }

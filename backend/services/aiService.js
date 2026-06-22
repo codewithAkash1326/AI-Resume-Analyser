@@ -9,26 +9,26 @@ const model = genAI.getGenerativeModel({
 const analyzeResumeWithAI = async (resumeText, jobDescription) => {
   try {
     const prompt = `
-You are an ATS Resume Analyzer.
+          You are an ATS Resume Analyzer.
 
-Analyze the following resume against the job description.
+          Analyze the following resume against the job description.
 
-Return ONLY valid JSON.
+          Return ONLY valid JSON.
 
-{
-  "atsScore": number,
-  "keywordMatch": number,
-  "missingKeywords": [],
-  "skillGap": [],
-  "recommendations": []
-}
+          {
+            "atsScore": number,
+            "keywordMatch": number,
+            "missingKeywords": [],
+            "skillGap": [],
+            "recommendations": []
+          }
 
-Resume:
-${resumeText}
+          Resume:
+          ${resumeText}
 
-Job Description:
-${jobDescription}
-`;
+          Job Description:
+          ${jobDescription}
+          `;
 
     const result = await model.generateContent(prompt);
 
