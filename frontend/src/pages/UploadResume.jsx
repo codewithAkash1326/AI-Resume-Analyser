@@ -85,7 +85,7 @@ function UploadResume() {
         <div className="upload-page">
           {/* Upload Section */}
           <div className="section-card">
-            <h1>📄 Upload Resume</h1>
+            <h1>Upload Resume</h1>
 
             <input
               type="file"
@@ -100,7 +100,7 @@ function UploadResume() {
 
           {/* Select Resume */}
           <div className="section-card">
-            <h2>📚 Select Resume</h2>
+            <h2>Select Resume</h2>
 
             {resumes.length === 0 ? (
               <p>No resumes uploaded yet.</p>
@@ -125,7 +125,7 @@ function UploadResume() {
 
           {/* Job Description */}
           <div className="section-card">
-            <h2>📝 Job Description</h2>
+            <h2>Job Description</h2>
 
             <textarea
               rows="10"
